@@ -64,22 +64,23 @@ void appStart(void){
 	ST_transaction_t tr = { .cardHolderData = cd, .terminalData = td};
 	int trec = recieveTransactionData(&tr);
 	switch (trec) {
-		case 0:
+		case 0:{
 			ST_accountsDB_t account;
 			float balance = -1;
 			if(getAccount(tr.cardHolderData.primaryAccountNumber, &account))
 				balance = account.balance;
 			printf("successful transaction - balance = %f\n", balance);
 			break;
-		case 1:
+		}case 1:{
 			printf("decliend insuffecient funds!\n");
 			break;
-		case 2:
+		}case 2:{
 			printf("decliend invalid account!\n");
 			break;
-		default:
+		}default:{
 			printf("unknown error\n");
 			break;
+		}
 	}
 
 }
